@@ -118,6 +118,40 @@ pnpm bundle:esbuild
 
 This project is under the GPL V3 LICENSE.
 
+## Docker (GHCR)
+
+This fork includes a GitHub Actions workflow that builds and pushes a Docker image to GHCR when you push a tag like `v1.2.3`.
+
+Image name:
+
+- `ghcr.io/<owner>/<repo>:vX.Y.Z` (example: `ghcr.io/zwenooo/sub-store:v2.21.3`)
+
+### 1) Release (push tag)
+
+On Windows, in `d:\code\Sub-Store`:
+
+```bash
+git tag v2.21.3
+git push origin v2.21.3
+```
+
+### 2) Run (server)
+
+Use the helper script (recommended):
+
+```bash
+./rerun.sh v2.21.3
+```
+
+Or run manually:
+
+```bash
+docker run -d --name sub-store \
+  -p 3000:3000 \
+  -v sub-store-data:/data \
+  ghcr.io/zwenooo/sub-store:v2.21.3
+```
+
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FPeng-YM%2FSub-Store.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FPeng-YM%2FSub-Store?ref=badge_large)
 
 ## Star History
